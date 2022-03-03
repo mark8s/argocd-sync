@@ -9,8 +9,6 @@ import (
 	"os"
 )
 
-// https://xieys.club/go-client-conversion/
-
 var (
 	tektonServer string
 	namespace    string
@@ -71,6 +69,7 @@ func main() {
 	pipelineRun.Spec.Params = params
 	pipelineRun.ResourceVersion = ""
 
+	// obj convert json []byte
 	pipelineRunJson, _ := json.Marshal(pipelineRun)
 	// log.Println(string(pipelineRunJson))
 
@@ -78,6 +77,8 @@ func main() {
 	DeletePipelineRun(namespace, name)
 	log.Println("Create PipelineRun: ", namespace)
 	createPipelineRun(namespace, pipelineRunJson)
+
+	// https://xieys.club/go-client-conversion/
 
 	//yml, _ := yaml.JSONToYAML(resJson)
 	//ymlName := fmt.Sprintf("%s.yml", pipelineRun.Name)

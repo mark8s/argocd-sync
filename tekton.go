@@ -19,6 +19,7 @@ var (
 	authValue       = "tektoncd/dashboard"
 )
 
+// GetPipelineRun get pipelineRun resource by params namespace and name
 func GetPipelineRun(namespace, name string) *PipelineRun {
 	url := tektonServer + apiPre + namespacePre + namespace + pipelineRunsPre + name
 	response, err := http.Get(url)
@@ -33,11 +34,13 @@ func GetPipelineRun(namespace, name string) *PipelineRun {
 	}
 
 	pipelineRun := &PipelineRun{}
+	// json str convert obj
 	json.Unmarshal(body, pipelineRun)
 
 	return pipelineRun
 }
 
+// createPipelineRun create pipelineRun resource by namespace and pipelineRun definition
 func createPipelineRun(namespace string, pipelineRun []byte) {
 	url := tektonServer + apiPre + namespacePre + namespace + pipelineRunsPre + name
 	request, _ := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(pipelineRun))
@@ -51,6 +54,7 @@ func createPipelineRun(namespace string, pipelineRun []byte) {
 	// log.Println(string(body))
 }
 
+// DeletePipelineRun delete pipelineRun resource by params namespace and name
 func DeletePipelineRun(namespace, name string) {
 	url := tektonServer + apiPre + namespacePre + namespace + pipelineRunsPre + name
 	request, _ := http.NewRequest(http.MethodDelete, url, nil)
