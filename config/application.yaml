@@ -1,0 +1,7 @@
+# tekton server address
+TEKTON_SERVER: "http://tekton-jx.devopsman.io"
+# e2e pinePineRun info
+PIPELINERUN:
+  NAMESPACE: "jx"
+  NAME: "jwt-demo-pipeline-run"
+  PARAMIMG: "harbor.devopsman.io/devopsman/go-e2e-stress-tool:v3"

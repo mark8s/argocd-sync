@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postdeal-when-sync-healthy
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: postdeal
+          image: harbor.devopsman.io/devopsman/argocd-sync:1.2
+          env:
+            - name: PIPELINERUN_PARAMIMG
+              value: nginx
+      restartPolicy: Never
+  backoffLimit: 2
