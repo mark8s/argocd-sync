@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
         - name: postdeal
-          image: harbor.devopsman.io/devopsman/argocd-sync:1.2
+          image: harbor.devopsman.io/devopsman/argocd-sync:1.6
           env:
             - name: PIPELINERUN_PARAMIMG
               value: nginx
