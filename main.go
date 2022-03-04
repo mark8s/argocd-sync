@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/spf13/viper"
-	"github.com/tektoncd/pipeline/pkg/apis/pipeline/v1beta1"
 	"log"
 	"os"
 )
@@ -54,28 +53,28 @@ func init() {
 
 	log.Println("pipelineRunNamespace: ", namespace)
 	log.Println("pipelineRunName: ", name)
-	log.Println("e2e test image: ", paramImg)
+	// log.Println("e2e test image: ", paramImg)
 }
 
 func main() {
 	pipelineRun := GetPipelineRun(namespace, name)
-	params := pipelineRun.Spec.Params
+	/*params := pipelineRun.Spec.Params
 	for i := 0; i < len(params); i++ {
 		if params[i].Name == "E2E_STRESS_IMAGE" {
 			params[i].Value = v1beta1.ArrayOrString{Type: "string", StringVal: paramImg}
 		}
-	}
+	}*/
 	pipelineRun.Name = name
-	pipelineRun.Spec.Params = params
+	//pipelineRun.Spec.Params = params
 	pipelineRun.ResourceVersion = ""
 
 	// obj convert json []byte
 	pipelineRunJson, _ := json.Marshal(pipelineRun)
 	// log.Println(string(pipelineRunJson))
 
-	log.Println("Delete PipelineRun: ", namespace)
+	log.Println("Delete PipelineRun: ", name)
 	DeletePipelineRun(namespace, name)
-	log.Println("Create PipelineRun: ", namespace)
+	log.Println("Create PipelineRun: ", name)
 	createPipelineRun(namespace, pipelineRunJson)
 
 	// https://xieys.club/go-client-conversion/
