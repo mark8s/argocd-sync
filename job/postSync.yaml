@@ -10,8 +10,5 @@ spec:
       containers:
         - name: postdeal
           image: harbor.devopsman.io/devopsman/argocd-sync:1.7
-          env:
-            - name: PIPELINERUN_PARAMIMG
-              value: nginx
       restartPolicy: Never
   backoffLimit: 2
